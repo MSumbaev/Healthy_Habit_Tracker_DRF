@@ -10,6 +10,11 @@ from users.serializers import UserSerializer
 class UserCreateAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
 
+    def perform_create(self, serializer):
+        user = serializer.save()
+        user.set_password(user.password)
+        user.save()
+
 
 class UserListAPIView(generics.ListAPIView):
     serializer_class = UserSerializer
