@@ -10,3 +10,4 @@ redis
 django-celery-beat
 django-cors-headers
 drf-yasg
+flake8

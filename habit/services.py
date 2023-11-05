@@ -22,7 +22,7 @@ def send_message(tg_bot_token, habit_):
     """Функция для отправки сообщения в telegram"""
     send_message_url = f'https://api.telegram.org/bot{tg_bot_token}/sendMessage'
 
-    message_tg = (f'Привет!!!\n'
+    message_tg = (f'Привет!\n'
                   f'Вам нужно сделать: {habit_.action} в {habit_.time}\n'
                   f'Место действия: {habit_.place}\n'
                   f'Продолжительность действия: {habit_.length} сек.\n'
