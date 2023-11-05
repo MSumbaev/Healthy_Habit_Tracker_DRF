@@ -188,7 +188,7 @@ class HabitCreateTestCase(APITestCase):
             response.json(),
             {
                 'non_field_errors': [
-                    'Периодичность не может быть больше 7 раз в неделю!'
+                    'Нельзя выполнять привычку реже, чем 1 раз в 7 дней!'
                 ]
             }
         )
@@ -219,7 +219,7 @@ class HabitCreateTestCase(APITestCase):
             response.json(),
             {
                 'non_field_errors': [
-                    'Нельзя выполнять привычку реже, чем 1 раз в 7 дней!'
+                    'Периодичность не может быть меньше 1!'
                 ]
             }
         )

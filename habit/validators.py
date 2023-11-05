@@ -45,9 +45,9 @@ class PeriodValidator:
         period = data.get('period')
 
         if period > 7:
-            raise ValidationError('Периодичность не может быть больше 7 раз в неделю!')
+            raise ValidationError('Нельзя выполнять привычку реже, чем 1 раз в 7 дней!')
 
         if period < 1:
-            raise ValidationError('Нельзя выполнять привычку реже, чем 1 раз в 7 дней!')
+            raise ValidationError('Периодичность не может быть меньше 1!')
 
 
