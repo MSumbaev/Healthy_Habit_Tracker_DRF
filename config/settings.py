@@ -160,9 +160,9 @@ SIMPLE_JWT = {
 
 TG_BOT_TOKEN = os.getenv('TG_BOT_TOKEN')
 
-CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
 
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')
 
 CELERY_BEAT_SCHEDULE = {
     'blocking_inactive_user': {
