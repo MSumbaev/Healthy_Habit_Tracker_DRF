@@ -18,6 +18,7 @@ class Habit(models.Model):
     reward = models.CharField(max_length=100, verbose_name='Вознаграждение', **NULLABLE)
     length = models.SmallIntegerField(verbose_name='Время на выполнение')
     is_public = models.BooleanField(verbose_name='Признак публикации')
+    last_dispatch_time = models.DateTimeField(verbose_name='Время последней отправки', **NULLABLE)
 
     def __str__(self):
         return f'{self.action}'

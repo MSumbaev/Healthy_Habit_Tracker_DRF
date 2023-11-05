@@ -310,6 +310,7 @@ class HabitListTestCase(APITestCase):
                         "reward": self.habit.reward,
                         "length": self.habit.length,
                         "is_public": self.habit.is_public,
+                        "last_dispatch_time": None,
                         "owner": self.habit.owner.pk,
                         "linked": self.habit.linked
                     }
@@ -401,6 +402,7 @@ class HabitRetrieveTestCase(APITestCase):
                 "reward": self.habit.reward,
                 "length": self.habit.length,
                 "is_public": self.habit.is_public,
+                "last_dispatch_time": None,
                 "owner": self.habit.owner.pk,
                 "linked": self.habit.linked
             }
@@ -457,6 +459,7 @@ class HabitUpdateTestCase(APITestCase):
                 "reward": "1000000$",
                 "length": 30,
                 "is_public": self.habit.is_public,
+                "last_dispatch_time": None,
                 "owner": self.habit.owner.pk,
                 "linked": self.habit.linked
             }
