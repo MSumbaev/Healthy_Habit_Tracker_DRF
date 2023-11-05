@@ -3,3 +3,8 @@ djangorestframework
 psycopg2
 python-dotenv
 djangorestframework-simplejwt
+coverage
+requests
+celery
+redis
+django-celery-beat

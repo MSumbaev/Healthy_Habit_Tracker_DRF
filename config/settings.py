@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework_simplejwt',
+    'django_celery_beat',
 
     'users',
     'habit',
@@ -153,3 +154,15 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
+TG_BOT_TOKEN = os.getenv('TG_BOT_TOKEN')
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+
+CELERY_BEAT_SCHEDULE = {
+    'blocking_inactive_user': {
+        'task': 'habit.tasks.send_notification_tg',
+        'schedule': timedelta(minutes=1),  # Каждую минуту
+    },
+}
