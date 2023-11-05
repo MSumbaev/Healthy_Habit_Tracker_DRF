@@ -2,6 +2,7 @@ from rest_framework.exceptions import ValidationError
 
 
 class RewardOrLinkedValidator:
+    """Валидатор на одновременное заполнение полей 'linked' и 'reward'"""
     def __init__(self, reward, linked):
         self.reward = reward
         self.linked = linked
@@ -17,6 +18,7 @@ class RewardOrLinkedValidator:
 
 
 class ExecutionDurationValidator:
+    """Валидатор на продолжительность действия 'length'"""
     def __init__(self, length):
         self.length = length
 
@@ -30,6 +32,7 @@ class ExecutionDurationValidator:
 
 
 class LinkedHabitsValidator:
+    """Валидатор на то, что в связанные привычки могут попадать только привычки с признаком приятной привычки"""
     def __init__(self, linked):
         self.linked = linked
 
@@ -46,6 +49,7 @@ class LinkedHabitsValidator:
 
 
 class PleasantHabitValidator:
+    """Валидатор на то, что у приятной привычки не может быть вознаграждения или связанной привычки"""
     def __init__(self, reward, linked, is_pleasant):
         self.reward = reward
         self.linked = linked
@@ -65,6 +69,7 @@ class PleasantHabitValidator:
 
 
 class PeriodValidator:
+    """Валидатор на правильное задание поля 'period'"""
     def __init__(self, period):
         self.period = period
 

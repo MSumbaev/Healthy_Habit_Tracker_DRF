@@ -7,6 +7,7 @@ from users.models import User
 
 
 class HabitCreateTestCase(APITestCase):
+    """TestCase на создание привычки"""
     def setUp(self):
         self.user = User.objects.create(
             email='test@habit.com',
@@ -38,6 +39,7 @@ class HabitCreateTestCase(APITestCase):
         )
 
     def test_reward_or_Linked_validator(self):
+        """Тест валидации на одновременное заполнение полей 'linked' и 'reward'"""
         self.client.force_authenticate(user=self.user)
 
         data = {
@@ -70,6 +72,7 @@ class HabitCreateTestCase(APITestCase):
         )
 
     def test_execution_duration_validator(self):
+        """Тест валидации на время выполнения действия 'length'"""
         self.client.force_authenticate(user=self.user)
 
         data = {
@@ -101,6 +104,8 @@ class HabitCreateTestCase(APITestCase):
         )
 
     def test_linked_habits_validator(self):
+        """Тест валидации на то, что в связанные привычки
+        могут попадать только привычки с признаком приятной привычки"""
         self.client.force_authenticate(user=self.user)
 
         data = {
@@ -132,6 +137,7 @@ class HabitCreateTestCase(APITestCase):
         )
 
     def test_pleasant_habit_validator(self):
+        """Тест валидации на то, что у приятной привычки не может быть вознаграждения или связанной привычки"""
         self.client.force_authenticate(user=self.user)
 
         data = {
@@ -163,6 +169,7 @@ class HabitCreateTestCase(APITestCase):
         )
 
     def test_period_validator_more_than_seven(self):
+        """ Тест валидации на периодичность привычки реже чем 1 раз в неделю"""
         self.client.force_authenticate(user=self.user)
 
         data = {
@@ -194,6 +201,7 @@ class HabitCreateTestCase(APITestCase):
         )
 
     def test_period_validator_less_than_one(self):
+        """Тест валидации на периодичность привычки чаще чем 1 раз в день"""
         self.client.force_authenticate(user=self.user)
 
         data = {
@@ -226,6 +234,7 @@ class HabitCreateTestCase(APITestCase):
 
 
 class HabitDestroyTestCase(APITestCase):
+    """TestCase на удаление привычки"""
     def setUp(self):
         self.user = User.objects.create(
             email='test@habit.com',
@@ -246,6 +255,7 @@ class HabitDestroyTestCase(APITestCase):
         )
 
     def test_habit_delete(self):
+        """Test на удаление привычки"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.delete(
@@ -262,6 +272,7 @@ class HabitDestroyTestCase(APITestCase):
 
 
 class HabitListTestCase(APITestCase):
+    """TestCase на вывод списка привычек"""
     def setUp(self):
         self.user = User.objects.create(
             email='test@habit.com',
@@ -282,6 +293,7 @@ class HabitListTestCase(APITestCase):
         )
 
     def test_habit_list(self):
+        """Test на вывод списка привычек"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(
@@ -320,6 +332,7 @@ class HabitListTestCase(APITestCase):
 
 
 class HabitListPublicTestCase(APITestCase):
+    """TestCase на вывод списка публичных привычек"""
     def setUp(self):
         self.user = User.objects.create(
             email='test@habit.com',
@@ -340,6 +353,7 @@ class HabitListPublicTestCase(APITestCase):
         )
 
     def test_habit_public_list(self):
+        """Test на вывод списка публичных привычек"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(
@@ -358,6 +372,7 @@ class HabitListPublicTestCase(APITestCase):
 
 
 class HabitRetrieveTestCase(APITestCase):
+    """TestCase на вывод привычки"""
     def setUp(self):
         self.user = User.objects.create(
             email='test@habit.com',
@@ -378,6 +393,7 @@ class HabitRetrieveTestCase(APITestCase):
         )
 
     def test_habit_retrieve(self):
+        """Test на вывод привычки"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(
@@ -410,6 +426,7 @@ class HabitRetrieveTestCase(APITestCase):
 
 
 class HabitUpdateTestCase(APITestCase):
+    """TestCase на обновление привычки"""
     def setUp(self):
         self.user = User.objects.create(
             email='test@habit.com',
@@ -430,6 +447,7 @@ class HabitUpdateTestCase(APITestCase):
         )
 
     def test_habit_update(self):
+        """Test на обновление привычки"""
         self.client.force_authenticate(user=self.user)
 
         data = {

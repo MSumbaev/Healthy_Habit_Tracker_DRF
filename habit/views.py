@@ -8,6 +8,7 @@ from habit.serializers import HabitSerializer
 
 
 class HabitCreateAPIView(generics.CreateAPIView):
+    """Эндпоинт создание привычки"""
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated]
 
@@ -18,6 +19,7 @@ class HabitCreateAPIView(generics.CreateAPIView):
 
 
 class HabitListAPIView(generics.ListAPIView):
+    """Эндпоинт вывода списка привычек принадлежащих владельцу"""
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated]
@@ -28,6 +30,7 @@ class HabitListAPIView(generics.ListAPIView):
 
 
 class HabitPublicListAPIView(generics.ListAPIView):
+    """Эндпоинт вывода списка публичных привычек"""
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated]
@@ -37,12 +40,14 @@ class HabitPublicListAPIView(generics.ListAPIView):
 
 
 class HabitRetrieveAPIView(generics.RetrieveAPIView):
+    """Эндпоинт вывода одной привычки"""
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
 
 
 class HabitUpdateAPIView(generics.UpdateAPIView):
+    """Эндпоинт обновления привычки"""
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]
@@ -54,5 +59,6 @@ class HabitUpdateAPIView(generics.UpdateAPIView):
 
 
 class HabitDestroyAPIView(generics.DestroyAPIView):
+    """Эндпоинт удаления привычки"""
     queryset = Habit.objects.all()
     permission_classes = [IsAuthenticated, IsOwner]

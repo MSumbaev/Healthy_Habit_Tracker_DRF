@@ -5,7 +5,8 @@ from rest_framework.test import APITestCase
 from users.models import User
 
 
-class UserTestCase(APITestCase):
+class UserTokenTestCase(APITestCase):
+    """TestCase на получение токена юзера"""
     def setUp(self):
         self.user = User.objects.create(
             email='test2@habit.com',
@@ -14,6 +15,7 @@ class UserTestCase(APITestCase):
         )
 
     def test_get_users_token(self):
+        """Test на получение токена юзера"""
         self.user.set_password(self.user.password)
         self.user.save()
 
@@ -35,11 +37,12 @@ class UserTestCase(APITestCase):
 
 
 class UserCreateTestCase(APITestCase):
+    """TestCase на создания юзера"""
     def setUp(self):
         pass
 
     def test_create_user(self):
-
+        """Test на создания юзера"""
         data = {
             'email': 'test1@habit.com',
             'password': 'test',
@@ -58,6 +61,7 @@ class UserCreateTestCase(APITestCase):
 
 
 class UserDestroyTestCase(APITestCase):
+    """TestCase на удаление юзера"""
     def setUp(self):
         self.user = User.objects.create(
             email='test@habit.com',
@@ -66,6 +70,7 @@ class UserDestroyTestCase(APITestCase):
         )
 
     def test_user_delete(self):
+        """Test на удаление юзера"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.delete(
@@ -82,6 +87,7 @@ class UserDestroyTestCase(APITestCase):
 
 
 class UserListTestCase(APITestCase):
+    """TestCase на вывод списка юзеров"""
     def setUp(self):
         self.user = User.objects.create(
             email='test@habit.com',
@@ -91,6 +97,7 @@ class UserListTestCase(APITestCase):
         )
 
     def test_user_list(self):
+        """Test на вывод списка юзеров"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(
@@ -104,6 +111,7 @@ class UserListTestCase(APITestCase):
 
 
 class UserRetrieveTestCase(APITestCase):
+    """TestCase на вывод профиля юзера"""
     def setUp(self):
         self.user = User.objects.create(
             email='test@habit.com',
@@ -112,6 +120,7 @@ class UserRetrieveTestCase(APITestCase):
         )
 
     def test_user_retrieve(self):
+        """Test на вывод профиля юзера"""
         self.client.force_authenticate(user=self.user)
 
         response = self.client.get(
@@ -126,6 +135,7 @@ class UserRetrieveTestCase(APITestCase):
 
 
 class UserUpdateTestCase(APITestCase):
+    """TestCase на обновление юзера"""
     def setUp(self):
         self.user = User.objects.create(
             email='test@habit.com',
@@ -134,6 +144,7 @@ class UserUpdateTestCase(APITestCase):
         )
 
     def test_user_update(self):
+        """Test на обновление юзера"""
         self.client.force_authenticate(user=self.user)
 
         data = {
