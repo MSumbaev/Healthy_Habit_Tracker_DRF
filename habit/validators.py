@@ -2,38 +2,62 @@ from rest_framework.exceptions import ValidationError
 
 
 class RewardOrLinkedValidator:
-    def __call__(self, data):
-        habits_reward = data.get('reward')
-        habits_linked = data.get('linked')
+    def __init__(self, reward, linked):
+        self.reward = reward
+        self.linked = linked
+
+    def __call__(self, value):
+        habits_reward = dict(value).get(self.reward)
+        habits_linked = dict(value).get(self.linked)
 
         if habits_reward and habits_linked:
             raise ValidationError('Нельзя выбрать одновременно связанную привычку и вознаграждение!')
+        elif habits_reward is None and habits_linked is None:
+            return
 
 
 class ExecutionDurationValidator:
-    def __call__(self, data):
-        habits_length = data.get('length')
+    def __init__(self, length):
+        self.length = length
 
-        if habits_length > 120:
+    def __call__(self, value):
+        habits_length = dict(value).get(self.length)
+
+        if habits_length is None:
+            return
+        elif int(habits_length) > 120:
             raise ValidationError('Время выполнения должно быть не больше 120 секунд!')
 
 
 class LinkedHabitsValidator:
-    def __call__(self, data):
-        linked_habit = data.get('linked')
+    def __init__(self, linked):
+        self.linked = linked
+
+    def __call__(self, value):
+        linked_habit = value.get(self.linked)
 
         if linked_habit is not None:
             if not linked_habit.is_pleasant:
                 raise ValidationError(
                     'В связанные привычки могут попадать только привычки с признаком приятной привычки!'
                 )
+        else:
+            return
 
 
 class PleasantHabitValidator:
-    def __call__(self, data):
-        pleasant_habit = data.get('is_pleasant')
-        habits_reward = data.get('reward')
-        habits_linked = data.get('linked')
+    def __init__(self, reward, linked, is_pleasant):
+        self.reward = reward
+        self.linked = linked
+        self.is_pleasant = is_pleasant
+
+    def __call__(self, value):
+        pleasant_habit = dict(value).get(self.is_pleasant)
+        habits_reward = dict(value).get(self.reward)
+        habits_linked = dict(value).get(self.linked)
+
+        if pleasant_habit is None and habits_linked is None and habits_linked is None:
+            return
 
         if pleasant_habit:
             if habits_reward or habits_linked:
@@ -41,13 +65,15 @@ class PleasantHabitValidator:
 
 
 class PeriodValidator:
-    def __call__(self, data):
-        period = data.get('period')
+    def __init__(self, period):
+        self.period = period
 
-        if period > 7:
+    def __call__(self, value):
+        habits_period = dict(value).get(self.period)
+
+        if habits_period is None:
+            return
+        elif int(habits_period) > 7:
             raise ValidationError('Нельзя выполнять привычку реже, чем 1 раз в 7 дней!')
-
-        if period < 1:
+        elif int(habits_period) < 1:
             raise ValidationError('Периодичность не может быть меньше 1!')
-
-
