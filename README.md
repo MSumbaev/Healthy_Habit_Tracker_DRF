@@ -38,6 +38,10 @@ celery -A config worker -l INFO
 celery -A config beat -l INFO -S django
 ```
 
+## Запуск проекта в Docker
 
-
-
+1. Необходимо установить на машину Docker и Docker-Compose;
+2. Освободите порты 5432 и 6379 если они заняты;
+3. Создайте файл .env используя шаблон .env.sample;
+4. Для отправки уведомлений в Telegram создайте своего бота (см пункт 8 предыдущий раздел);
+5. Запустите проект с помощью команды `docker-compose up -d --build`
